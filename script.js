@@ -1,33 +1,51 @@
-let nameInput = document.getElementById("nameInput");
-let firstName = document.getElementById("name");
-let ageInput = document.getElementById("ageInput");
-let age = document.getElementById("age");
-let countryInput = document.getElementById("countryInput");
-let country = document.getElementById("country");
-let color = document.getElementById("colorInput");
 let box = document.getElementById("box");
-let card1 = document.getElementById("card1");
 function displayCard() {
-  if (nameInput.value.length < 2) return;
-  if (ageInput.value < 0) return;
-  let currentCard;
-  card1.classList.remove("d-none");
+
+  let nameInput = document.getElementById("nameInput");
+  let ageInput = document.getElementById("ageInput");
+  let countryInput = document.getElementById("countryInput");
+  let color = document.getElementById("colorInput");
+  if (nameInput.value.length < 2)
+    return;
+  if (ageInput.value < 0)
+    return;
   let valueName = nameInput.value;
   let valueAge = ageInput.value;
   let valueCountry = countryInput.value;
-  firstName.innerHTML = valueName;
-  age.innerHTML = valueAge;
-  country.innerHTML = valueCountry;
-  card1.style.backgroundColor = color.value;
-  currentCard = card1.innerHTML;
-  box.appendChild(currentCard);
-  console.log(currentCard);
 
-  console.log(card1);
-  console.log(box);
-
+  console.log(`Name: ${valueName}, age: ${valueAge}, country: ${valueCountry}`)
+  createCard(valueName, valueAge, color.value, valueCountry);
   nameInput.value = "";
   ageInput.value = "";
   colorInput.value = "#174485";
   countryInput.value = "";
+
+
+}
+function createCard(name, age, color, country) {
+  console.log(`Name: ${name}, age: ${age}, country: ${country}`)
+  let card = document.createElement("div");
+  card.classList.add('card');
+  card.style.backgroundColor = color;
+
+  let list = document.createElement("ul");
+  list.classList.add('list-group');
+  card.appendChild(list);
+  let liName = document.createElement("li");
+  let liAge = document.createElement("li");
+  let liCountry = document.createElement("li");
+  liName.id = "name";
+  liAge.id = "age";
+  liCountry.id = "country";
+
+  liName.innerHTML = name;
+  liAge.innerHTML = country;
+  liCountry.innerHTML = age;
+  list.appendChild(liName);
+  list.appendChild(liAge);
+  list.appendChild(liCountry);
+
+  document.getElementById('box').appendChild(card);
+
+
 }
